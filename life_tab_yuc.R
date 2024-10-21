@@ -81,3 +81,71 @@ tab_mort_mx <-rbind((tab_mort %>%
 
 tab_mort_mx <-tab_mort_mx %>% 
   arrange(age, year)
+
+table(tab_mort_mx$edo)
+
+tab_mort_yuc <- tab_mort_mx %>% 
+  filter(edo == "Yucatán")
+
+#############################################################
+#Gráficos --------
+#lx
+tab_mort_yuc %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = lx, color = year, group = year)) +
+  labs(caption = "Fuente: Conciliación Demográfica, CONAPO 2022",
+       title = "Progresión de lx por edad, Hombres y Mujeres y
+       Ambos en Yucatán", 
+       x = "Edad",
+       y = "lx") +
+  scale_color_gradient(low = "green", high = "Blue")+
+  facet_wrap(~sex, labeller = labeller(sex = c("males" = "Hombres", "females" = "Mujeres", "both" = "Ambos"))) +
+  theme_minimal()
+ggsave("output/lx_yuc.png", dpi= 3000)
+
+#dx
+tab_mort_yuc %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = dx, color = year, group = year)) +
+  labs(caption = "Fuente: Conciliación Demográfica, CONAPO 2022",
+       title = "Progresión de dx por edad, Hombres y Mujeres y
+       Ambos en Yucatán", 
+       x = "Edad",
+       y = "dx") +
+  scale_color_gradient(low = "green", high = "Blue")+
+  facet_wrap(~sex, labeller = labeller(sex = c("males" = "Hombres", "females" = "Mujeres", "both" = "Ambos"))) +
+  theme_minimal()
+ggsave("output/dx_yuc.png", dpi= 3000)
+
+#qx
+tab_mort_yuc %>% 
+  ggplot() +
+  geom_line(aes(x = age, y = qx, color = year, group = year)) +
+  labs(caption = "Fuente: Conciliación Demográfica, CONAPO 2022",
+       title = "Progresión de qx por edad, Hombres y Mujeres y
+       Ambos en Yucatán", 
+       x = "Edad",
+       y = "qx") +
+  scale_color_gradient(low = "green", high = "Blue")+
+  facet_wrap(~sex, labeller = labeller(sex = c("males" = "Hombres", "females" = "Mujeres", "both" = "Ambos"))) +
+  theme_minimal()
+ggsave("output/qx_yuc.png", dpi= 3000)
+
+tab_mort_yuc %>% 
+  filter( age == 0) %>% 
+  ggplot()+
+  geom_line(aes(x= year, y=Ex, color = year)) +
+  labs(caption = "Fuente: Conciliación Demográfica, CONAPO 2022",
+       title = "Progresión de la esperanza de Vida al nacimiento en Yucatán", 
+       x = "Año",
+       y = "Esperanza de Vida al nacimiento") +
+  scale_color_gradient(low = "green", high = "Blue")+
+  facet_wrap(~sex, labeller = labeller(sex = c("males" = "Hombres", 
+                                               "females" = "Mujeres", 
+                                               "both" = "Ambos"))) +
+  theme_light()
+ggsave("output/e0_yuc.png", dpi= 3000)
+
+
+
+

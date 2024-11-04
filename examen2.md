@@ -291,12 +291,15 @@ df_causes2 <- df_causes1 %>%
   group_by(sexo, age, dos_causas) %>%  #agrupo
   summarise(defs = sum(defs), .groups = "drop") %>% #resumo la tabla 
   group_by(sexo, age) %>% 
-  mutate( prop = defs/sum(defs)) #creamosla variable de ndxi /ndx
-
+  mutate( prop = defs/sum(defs)) %>% #creamosla variable de ndxi /ndx
+  ungroup() %>% 
+  mutate(id = paste(age, sex, sep= "")) %>% #id 
+  na.omit()
 ```
 
+Pegamos la proporcion de muerte por causa i y la pegamos a la tabla de vida. 
 
-
+```{r}
 
 
 

@@ -32,7 +32,7 @@ base0 <- full_join(Nx, Dx, by= "id") %>%
          pop = pop, 
          defs = defs) %>% 
   mutate( sex = ifelse(sex == "Hombres", "males", "females")) #mutate sexo
-
+save(base0, file= "input/base0.RData")
 
 tab_mort <- base0 %>% 
   group_by(year, edo, sex) %>% 
@@ -92,7 +92,7 @@ tab_mort_yuc <- tab_mort_mx %>%
 #lx
 tab_mort_yuc %>% 
   ggplot() +
-  geom_line(aes(x = age, y = lx, color = year, group = year)) +
+  geom_line(aes(x = age, y = log(lx), color = year, group = year)) +
   labs(caption = "Fuente: Conciliación Demográfica, CONAPO 2022",
        title = "Progresión de lx por edad, Hombres y Mujeres y
        Ambos en Yucatán", 
@@ -120,7 +120,7 @@ ggsave("output/dx_yuc.png", dpi= 3000)
 #qx
 tab_mort_yuc %>% 
   ggplot() +
-  geom_line(aes(x = age, y = qx, color = year, group = year)) +
+  geom_line(aes(x = age, y = log(qx), color = year, group = year)) +
   labs(caption = "Fuente: Conciliación Demográfica, CONAPO 2022",
        title = "Progresión de qx por edad, Hombres y Mujeres y
        Ambos en Yucatán", 
@@ -145,6 +145,12 @@ tab_mort_yuc %>%
                                                "both" = "Ambos"))) +
   theme_light()
 ggsave("output/e0_yuc.png", dpi= 3000)
+
+
+######################################
+
+rm(list = ls()) #quitamos todos los objetos
+
 
 
 

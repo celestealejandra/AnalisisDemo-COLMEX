@@ -32,8 +32,7 @@ base0 <- full_join(Nx, Dx, by= "id") %>%
          pop = pop, 
          defs = defs) %>% 
   mutate( sex = ifelse(sex == "Hombres", "males", "females")) #mutate sexo
-
-
+save(base0, file= "input/base0.RData")
 tab_mort <- base0 %>% 
   group_by(year, edo, sex) %>% 
   mutate(mx = ifelse(pop>0, defs/pop, 1), 
@@ -73,11 +72,7 @@ tab_mort_mx <-tab_mort %>%
   replace_na(list(Ex = 0)) %>% 
   mutate( sex = "both", .before = qx)
 
-names(tab_mort_mx)
-tab_mort_mx <-rbind((tab_mort %>% 
-                       select(year, edo, cve_geo, age, sex,  qx, px, lx, dx, Lx, Tx, Ex)), 
-                    tab_mort_mx %>% 
-                      select(year, edo, cve_geo, age, sex,  qx, px, lx, dx, Lx, Tx, Ex))
 
-tab_mort_mx <-tab_mort_mx %>% 
-  arrange(age, year)
+
+##############}
+load("input/base0.R")

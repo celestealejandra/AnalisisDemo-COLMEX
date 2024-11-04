@@ -299,8 +299,17 @@ df_causes2 <- df_causes1 %>%
 
 Pegamos la proporcion de muerte por causa i y la pegamos a la tabla de vida. 
 
-
-
+```{r}
+tdcmult <- full_join(
+  tmort19, #tabla de vida
+  df_causes2 %>% 
+    filter(dos_causas == "Infecciosas") %>% #causas de muerte
+    select(id, prop), by = "id") %>% 
+  select(-id) %>% 
+  replace_na(list(prop = 0)) %>% 
+  na.omit()
+```
+OJO: Hay que tener cuidado con los NA's en las edades extremas y en la proporcion. 
 
 
 

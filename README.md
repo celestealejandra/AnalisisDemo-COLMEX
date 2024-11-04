@@ -27,7 +27,3 @@ En caso de dudas o aclaraciones contáctese con Celeste A. Díaz
 
 
 
-
-
-Para aclaraciones contáctese a 
-cdiaz@colmex.mx

@@ -273,7 +273,7 @@ Revisemos las causas
 names(table(df_causes1$disease_group))
 ```
 
-
+dddd
 
 
 

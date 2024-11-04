@@ -204,7 +204,7 @@ base <- base %>%
 base <- tab_mort_func(base = base)
 ```
 
-## Descomposición de Arriaga
+## 2. Descomposición de Arriaga
 Primero seleccionamos los años entre los cuales queremos ver el cambio en la mortalidad, para este ejemplo utilizamos 1950 y 2023, tomamos a las mujeres: 
 ```{r}
 
@@ -244,7 +244,7 @@ arriaga %>%
   summarise(ex1_ex2 = sum(delta_x, na.rm = T))
 ```
 
-## 2.Tablas de decrimento multiple
+## 3.Tablas de decrimento multiple
 Para poder generar una tabla para calcular la intensidad del fallecimiento por una causa i, necesitamos primero tener una tabla con las causas de muerte. La intensidad de las causas de muerte i se representa oir nMxi. Descarga la base de causas https://tinyurl.com/dfmort19
 
 La formula basica es esta: 
@@ -263,7 +263,7 @@ Y por lo tanto:
 **formula**
 
 
-### 2.1 Computar la tabla de vida con todas las causas de mortalidad
+### 3.1 Computar la tabla de vida con todas las causas de mortalidad
 Contruyamos primero nuestra tabla de mortalidad: 
 
 ```{r}
@@ -312,7 +312,7 @@ tdcmult <- full_join(
 **OJO**: Hay que tener cuidado con los NA's en las edades extremas y en la proporcion. 
 
 
-### 2.2 Cronstruccion de Probabilidad 
+### 3.2 Cronstruccion de Probabilidad 
 
 Ahora que tenemos computada la base procedemos a generar nqxi, el cual calculamos con la multiplicacion de qx y la proporcion de fallecimientos por la causa i: 
 
@@ -321,7 +321,7 @@ tdcmult <- tdcmult %>%
   mutate( qxi = qx*prop)
 ```
 
-### 2.3 Calcular conteo de fallecimientos por causas para la Cohorte fictica 
+### 3.3 Calcular conteo de fallecimientos por causas para la Cohorte fictica 
 
 Para cacular los fallecimientos en la cohorte ficticia multiplicamos la probabilidad de fallecimiento por la causa i por los sobrevivientes de la cohorte ficticia: 
 

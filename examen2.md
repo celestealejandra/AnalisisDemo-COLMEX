@@ -270,7 +270,7 @@ Contruyamos primero nuestra tabla de mortalidad:
 tmort19 <- base %>% 
   filter(edo == "República Mexicana", # para toda la rep
          year == 2019) %>%  #año 2019
-  select(age, sex, qx) %>% 
+  select(age, sex, qx, lx) %>% 
   mutate(id= paste(age, sex, sep="")) #generamos un id
 
 ```
@@ -312,16 +312,45 @@ tdcmult <- full_join(
 OJO: Hay que tener cuidado con los NA's en las edades extremas y en la proporcion. 
 
 
+### 2 Cronstruccion de Probabilidad 
 
+Ahora que tenemos computada la base procedemos a generar nqxi, el cual calculamos con la multiplicacion de qx y la proporcion de fallecimientos por la causa i: 
 
+```{r}
+tdcmult <- tdcmult %>% 
+  mutate( qxi = qx*prop)
+```
 
+### 3 Calcular conteo de fallecimientos por causas para la Cohorte fictica 
 
+Para cacular los fallecimientos en la cohorte ficticia multiplicamos la probabilidad de fallecimiento por la causa i por los sobrevivientes de la cohorte ficticia: 
 
+```{r}
 
+tdcmult <- tdcmult %>% 
+  mutate( dxi = qxi*lx)
 
+```
 
+Ahora calculamos los sobrevivientes: 
 
+```{r}
+tdcmult <- tdcmult %>% 
+  group_by(sex) %>% #agrupamos por sexo
+  mutate( lxi = rev(cumsum(dxi))) %>% 
+  ungroup()
+#rev para ir de lx+n a lx
+#cumsum para sumas acumuladas 
+```
+Y finalmente calculamos la proporcion de sobrevivientes a la edad x que falleceran de la causa i:
 
+```{r}
+tdcmult <- tdcmult %>% 
+  group_by(sex) %>% 
+  mutate( prop2 = (lxi/lx)*100) %>% 
+  ungroup()
+#Proporción de sobrevivientes a la edad x que eventualmente fallecen de la causa i
+```
 
 
 

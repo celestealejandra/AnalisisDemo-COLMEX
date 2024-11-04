@@ -16,9 +16,13 @@ Este repositorio contiene contenido de elaboración propia y se comparte sin fin
 
 ## Contacto 
 En caso de dudas o aclaraciones contáctese con Celeste A. Díaz 
+
 **Facebook:** Celeste Díaz
+
 **Correo Electrónico**: cdiaz@colmex.mx
+
 **Twitter**: @misteriosjpg
+
 **Instagram**: @celestelovespancakes
 
 

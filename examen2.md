@@ -273,8 +273,21 @@ Revisemos las causas
 names(table(df_causes1$disease_group))
 ```
 
-dddd
+Ahora vamos a crear una base donde generaremos la proporcion de ndxi con ndx, tambien separaremos las causas en i y en -i: 
 
+```{r}
+df_causes2 <- df_causes1 %>% 
+  mutate(sexo = case_when(sexo == 1 ~ "males",
+                         sexo == 2 ~ "females"), #nombre a la cat de sexo
+         dos_causas = ifelse(
+           disease_group == "Infecciosas", "Infecciosas", #i y -i en la formula
+           "Resto")) %>% 
+  group_by(sexo, age, dos_causas) %>%  #agrupo
+  summarise(defs = sum(defs), .groups = "drop") %>% #resumo la tabla 
+  group_by(sexo, age) %>% 
+  mutate( prop = defs/sum(defs)) #creamosla variable de ndxi /ndx
+
+```
 
 
 

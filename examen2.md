@@ -263,7 +263,7 @@ Y por lo tanto:
 **formula**
 
 
-###1. Computar la tabla de vida con todas las causas de mortalidad
+### 1. Computar la tabla de vida con todas las causas de mortalidad
 Contruyamos primero nuestra tabla de mortalidad: 
 
 ```{r}

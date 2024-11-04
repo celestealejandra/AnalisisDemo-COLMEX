@@ -204,7 +204,7 @@ base <- base %>%
 base <- tab_mort_func(base = base)
 ```
 
-##Descomposición de Arriaga
+## Descomposición de Arriaga
 Primero seleccionamos los años entre los cuales queremos ver el cambio en la mortalidad, para este ejemplo utilizamos 1950 y 2023, tomamos a las mujeres: 
 ```{r}
 

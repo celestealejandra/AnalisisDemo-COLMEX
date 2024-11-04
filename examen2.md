@@ -244,4 +244,59 @@ arriaga %>%
   summarise(ex1_ex2 = sum(delta_x, na.rm = T))
 ```
 
+## Tablas de decrimento multiple
+Para poder generar una tabla para calcular la intensidad del fallecimiento por una causa i, necesitamos primero tener una tabla con las causas de muerte. La intensidad de las causas de muerte i se representa oir nMxi. Descarga la base de causas https://tinyurl.com/dfmort19
+La formula basica es esta: 
+**formula**
+La probabilidad se calcula asi: 
+**formula**
+Utiliza lx por lo tanto: 
+**formula**
+Utilizamos tambien dos razones: de probabilidad y de conteo
+**formula**
+Y por lo tanto: 
+**formula**
+
+###1. Computar la tabla de vida con todas las causas de mortalidad
+Contruyamos primero nuestra tabla de mortalidad: 
+
+```{r}
+tmort19 <- base %>% 
+  filter(edo == "República Mexicana", # para toda la rep
+         year == 2019) %>%  #año 2019
+  select(age, sex, qx) %>% 
+  mutate(id= paste(age, sex, sep="")) #generamos un id
+
+```
+Revisemos las causas 
+```{r}
+names(table(df_causes1$disease_group))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

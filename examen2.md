@@ -299,7 +299,6 @@ df_causes2 <- df_causes1 %>%
 
 Pegamos la proporcion de muerte por causa i y la pegamos a la tabla de vida. 
 
-```{r}
 
 
 

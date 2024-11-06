@@ -353,6 +353,62 @@ tdcmult <- tdcmult %>%
 ```
 
 
+### 4. Tabla de Causa Eliminada 
+Para calcular fallecimientos eliminando una causa, podemos volver a cargar la tabla de mortalidad original y la tabla de causas de fallecimiento: 
+```{r}
+## Tabla de Causa Eliminada ----------------------
+#Decrimento 
+load("input/base.RData")
+load("input/df_causes2019.RData")
+source(file = "r/tab_mort_func.R")
+
+tab_mort <- tab_mort_func(base = base0)
+
+tmort19 <- tab_mort %>% 
+  filter(edo == "República Mexicana",
+         year == 2019) %>% 
+  select(age, sex, px) %>% #seleccionamos px en vez de q
+  mutate(id= paste(age, sex, sep="")) #generamos un id
+
+names(table(df_causes1$disease_group))i
+```
+**OJO**: La única diferencia es que en la tabla de mortalidad sólo seleccionamos px. 
+Lo siguiente es calcular Ri 
+
+```{r}
+#creo una base de datos donde sólo esten las externas 
+df_causes2 <- df_causes1 %>% 
+  mutate(sexo = case_when(sexo == 1 ~ "males",
+                          sexo == 2 ~ "females"), #nombre a la cat de sexo
+         dos_causas = ifelse(
+           disease_group == "Externas", "Externas", #i y -i en la formula
+           "Resto")) %>% 
+  group_by(sexo, age, dos_causas) %>%  #agrupo
+  summarise(defs = sum(defs), .groups = "drop") %>% #resumo la tabla 
+  group_by(sexo, age) %>% 
+  mutate( R_i = defs/sum(defs)) %>% #calculamos R_i
+  ungroup() %>% 
+  mutate(id = paste(age, sexo, sep=""))
+```
+Juntamos las dos bases: 
+
+```{r}
+tabladce <- full_join(
+  tmort19,
+  df_causes2, 
+  by= "id") %>% 
+  na.omit() %>% 
+  select( age = age.x, 
+          sexo = sexo,
+          px, 
+          R_i)
+```
+
+Ahora procedemos a hacer los cálculos de la tabla de vida. 
+
+### 4. 1 Pxi y Qxi
+
+Para calcular pxi y elevamos px a 
 
 
 

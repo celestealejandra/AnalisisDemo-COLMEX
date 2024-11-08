@@ -21,10 +21,11 @@ age <- c(7.1, 2.46, 3.9, 0.91, 9.62, 11.21,21.91,
          6 8.74, 77.78, 67.44, 36.99, 
          73.78, 33.19, 62.84, 53.77, 74.71)
 df1 <- as.data.frame(cbind(per, age))
-writexl::write_xlsx(df1, "output/df1.xlsx")
+writexl::write_xlsx(df1, "output/df1.xlsx") #esto lo hice en excel 
 
 # Tabla de mortalidad -------
 load("input/base.RData")
+#igual tenía en mi ambiente la función 
 tab_mort <- tab_mort_func(base = base0)
 
 tab_mort_b <-tab_mort %>% 

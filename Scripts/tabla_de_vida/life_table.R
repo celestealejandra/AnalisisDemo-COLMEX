@@ -72,6 +72,14 @@ tab_mort_mx <-tab_mort %>%
   replace_na(list(Ex = 0)) %>% 
   mutate( sex = "both", .before = qx)
 
+tab_mort_mx <-rbind((tab_mort %>% 
+                       select(year, edo, cve_geo, age, sex,  qx, px, lx, dx, Lx, Tx, Ex)), 
+                    tab_mort_b %>% 
+                      select(year, edo, cve_geo, age, sex,  qx, px, lx, dx, Lx, Tx, Ex))
+
+tab_mort_mx <-tab_mort_mx %>% 
+  arrange(age, year)
+
 
 
 ##############}

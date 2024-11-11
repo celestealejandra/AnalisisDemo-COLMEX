@@ -354,6 +354,14 @@ tdcmult <- tdcmult %>%
 
 
 ### 4. Tabla de Causa Eliminada 
+Revisemos nuestras causas y convirtámoslas a un vector: 
+```{r}
+#creo una base de datos donde sólo esten las externas 
+cause <- names(table(df_causes1$disease_group))##tabla de causas
+i <- 19 #escogemos una causa para ser nuestra i  
+
+```
+
 Para calcular fallecimientos eliminando una causa, podemos volver a cargar la tabla de mortalidad original y la tabla de causas de fallecimiento: 
 ```{r}
 ## Tabla de Causa Eliminada ----------------------
@@ -370,26 +378,27 @@ tmort19 <- tab_mort %>%
   select(age, sex, px) %>% #seleccionamos px en vez de q
   mutate(id= paste(age, sex, sep="")) #generamos un id
 
-names(table(df_causes1$disease_group))i
+names(table(df_causes1$disease_group))
 ```
 **OJO**: La única diferencia es que en la tabla de mortalidad sólo seleccionamos px. 
 Lo siguiente es calcular Ri 
 
 ```{r}
-#creo una base de datos donde sólo esten las externas 
 df_causes2 <- df_causes1 %>% 
   mutate(sexo = case_when(sexo == 1 ~ "males",
                           sexo == 2 ~ "females"), #nombre a la cat de sexo
          dos_causas = ifelse(
-           disease_group == "Externas", "Externas", #i y -i en la formula
-           "Resto")) %>% 
+           disease_group == cause[i], disease_group, #i y -i en la formula
+           "Resto")) %>%  ##cause es la variable i es la causa
   group_by(sexo, age, dos_causas) %>%  #agrupo
   summarise(defs = sum(defs), .groups = "drop") %>% #resumo la tabla 
   group_by(sexo, age) %>% 
   mutate( R_i = defs/sum(defs)) %>% #calculamos R_i
   ungroup() %>% 
-  mutate(id = paste(age, sexo, sep=""))
+  mutate(id = paste(age, sexo, sep=""))#creamosla variable de ndxi /ndx
+
 ```
+
 Juntamos las dos bases: 
 
 ```{r}

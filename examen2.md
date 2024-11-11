@@ -415,9 +415,16 @@ tabladce <- full_join(
 
 Ahora procedemos a hacer los cálculos de la tabla de vida. 
 
-### 4. 1 Pxi y Qxi
+### 4. 1 Pxi, Qxi, lxi, y dxi
 
-Para calcular pxi y elevamos px a 
+Seguimos las funciones según la tabla de vida: 
+```{r}
+tabladce %>% 
+  mutate(px_i = px^R_i,
+         qx_i = 1-px_i,
+         lx_i= c(1, cumprod(px_i))[-length(px_i)],
+         dx_i = lx_i*qx_i)
+```
 
 
 

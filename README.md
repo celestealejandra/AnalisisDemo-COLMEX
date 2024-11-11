@@ -8,7 +8,7 @@ Preston, S., Heuveline, P., & Guillot, M. (2001). Measuring and Modeling Populat
 # Compendios 
 Puede acceder a los compendios por examen en los siguientes enlaces.
 - [Examen 1](examen1.md)
-- [Examen 2](examen2.Rmd)
+- [Examen 2](examen2.md)
   
 # Aclaraciones y contacto
 ## Acerca de este repositorio

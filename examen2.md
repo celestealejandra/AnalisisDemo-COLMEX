@@ -97,7 +97,12 @@ Limitamos Mx a ser una probabilidad entre 0 y 1 dado que el grupo de edad tiene 
 #### 1.3 Calculamos ax
 
 Para calcular Ax tenemos que tener en cuenta varias condiciones. La primera condición es que en la edad 0 tiene un tratamiento especial de acuerdo con las fórumlas de Coale:
+
+
 ![Fórmula de Coale](Recursos/formulas/eq_coale1.png)
+
+![Fórmula de Coale](Recursos/formulas/eq_coale2.png)
+
 
 Entonces si 1m0 (la mortalidad entre la edad 0 y la edad 1) es superior a .107 en los hombres se reemplaza por .330 y en mujeres por.350. Si es menor, se reemplaza por la siguiente fórmula:
 

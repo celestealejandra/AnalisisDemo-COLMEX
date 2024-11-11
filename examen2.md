@@ -150,6 +150,11 @@ head(base)
 En esta sección calcularemos qx y px donde qx corresponde a la probabilidad condicional de fallecer en una edad y donde px es el complemento indicando la probabilidad de sobrevivir a esa edad. Ambas son condicionales, dado que se llegó a la edad x con vida. 
 Las formulas son las siguientes:
 
+
+![Formula Qx](Recursos/formulas/nqx.png)
+
+![Formula Qx](Recursos/formulas/npx.png)
+
 Y en código se calculan así: 
 ```{r}
 base <- base %>% 

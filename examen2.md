@@ -165,12 +165,14 @@ base <- base %>%
 ```
 
 #### 1.5 Creación de Cohorte Ficticia
-Primero se escoge un rádix para iniciar nuestra cohorte ficticia, puede ser cualquier número 1, 10, 100 y sus múltiplos. Posteriormente, se calculan lx+n por medio de esta fórmula: 
+Primero se escoge un rádix para iniciar nuestra cohorte ficticia, puede ser cualquier número 1, 10, 100 y sus múltiplos.
 
 Se calcularán los fallecimientos de la cohorte ficticia por medio de la siguiente fórmula: 
-
+![Formula ndx](Recursos/formulas/ndx.png)
 
 Lx van a ser los años persona vividos por los integrantes de la cohorte ficticia: 
+
+![Formula nLx](Recursos/formulas/nLx.png)
 
 El bloque de código correspondiente a estos cálculos es el siguiente: 
 ```{r}
@@ -187,6 +189,8 @@ Lx = lead(lx, default = 0)+ax*dx)
 
 #### 1.6 Calcular Tx y Ex
 Tx se deriva de la suma reversa de las edades para calcular los años persona vividos en la edad x y la fórmula es esta: 
+
+![formulatx](Recursos/formulas/tx.png)
 
 Ex es el cociente resultante de los años persona vividos en la edad x y los sobrevivientes a esa edad. 
 
